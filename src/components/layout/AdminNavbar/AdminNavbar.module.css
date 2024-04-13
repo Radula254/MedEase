@@ -1,0 +1,41 @@
+.container {
+    display: flex;
+    max-width: 1200px;
+    margin-left: 30px;
+}
+
+.sideMenu{
+    flex: 0 0 20vw;
+    padding: 0px;
+    border-right: 1px solid #ccc;
+}
+
+.brandName h1 {
+    color: #333;
+    font-size: 24px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.roleList {
+    list-style-type: none;
+    padding: 0;
+}
+
+.roleList li {
+    margin-bottom: 10px;
+}
+
+.roleList .Link {
+    color: #333;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease;
+    padding: 8px 10px;
+    border-radius: 4px;
+}
+
+.roleList .Link:hover {
+    background-color: #3B7BA6;
+}

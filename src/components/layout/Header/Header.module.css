@@ -1,0 +1,76 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 40px;
+  background: #c0c1c6;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+  z-index: 999;
+  position: sticky;
+  top: 0;
+  left: 0;
+}
+
+.header .logo {
+  max-width: 100%;
+  height: auto;
+  width: 90px;
+  opacity: 0.7;
+  padding: 0;
+}
+
+.header h3 {
+  margin: auto;
+  align-items: flex-start;
+}
+
+.logo {
+  max-width: 100%;
+  opacity: 0.7;
+  padding: 0;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  margin-left: 20px;
+}
+.navbarr {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  margin-left: 200px;
+}
+
+.navbarLi {
+  list-style: none;
+  padding: 0 15px;
+  position: relative;
+}
+
+.navbarLiLink {
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+  transition: 0.3s ease;
+}
+
+.navbarLiLink:hover,
+.navbarLiLink.active {
+  color: hsl(212, 86%, 31%);
+}
+
+.navbarLiLink.active::after,
+.navbarLiLink:hover::after {
+  content: "";
+  width: 30%;
+  height: 2px;
+  background: hsl(212, 86%, 31%);
+  position: absolute;
+  bottom: -4px;
+  left: 20px;
+}

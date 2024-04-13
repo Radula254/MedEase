@@ -1,0 +1,58 @@
+.team{
+    text-align: center;
+    padding: 40px 80px;
+    text-align: center;
+}
+
+.team .mgContainer{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+.team .manager{
+    width: 23%;
+    min-width: 250px;
+    padding: 10px 12px;
+    border: 5px solid #cce7d0;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 20px 20px 30px rgba(0,0,0,0.06);
+    margin: 15px 0;
+    transition: 0.2s ease;
+    position: relative;
+}
+
+.team .manager:hover{
+    box-shadow: 20px 20px 30px rgba(0,0,0,0.06);
+}
+
+.team .manager img{
+    width: 100%;
+    border-radius: 20px;
+}
+
+.team .manager .des{
+    text-align: start;
+    padding: 10px 0;
+}
+
+.team .manager .des span{
+    color: #606063;
+    font-size: 12px;
+}
+
+
+.team .manager .des h5{
+    padding-top: 7px;
+    color: #1a1a1a;
+    font-size: 14px;
+}
+
+.team .manager .des h4{
+    padding-top: 7px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #088178;
+}
