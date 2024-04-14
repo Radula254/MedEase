@@ -1,13 +1,13 @@
 import {authOptions} from "@/app/api/auth/[...nextauth]/route";
 import {User} from "../../models/User";
-import {UserInfo} from "../../models/UserInfo";
+import {PharmacistInfo} from "../../models/PharmacistInfo";
 import mongoose from "mongoose";
 import {getServerSession} from "next-auth";
 
 export async function PUT(req) {
   mongoose.connect(process.env.NEXT_PUBLIC_MONGOURL);
   const data = await req.json();
-  const {_id, name, image, ...otherUserInfo} = data;
+  const {_id, name, image, ...otherPharmacistInfo} = data;
 
   let filter = {};
   if (_id) {
@@ -20,7 +20,7 @@ export async function PUT(req) {
 
   const user = await User.findOne(filter);
   await User.updateOne(filter, {name, image});
-  await UserInfo.findOneAndUpdate({email:user.email}, otherUserInfo, {upsert:true});
+  await PharmacistInfo.findOneAndUpdate({email:user.email}, otherPharmacistInfo, {upsert:true});
 
   return Response.json(true);
 }
@@ -44,8 +44,8 @@ export async function GET(req) {
   }
 
   const user = await User.findOne(filterUser).lean();
-  const userInfo = await UserInfo.findOne({email:user.email}).lean();
+  const pharmacistInfo = await PharmacistInfo.findOne({email:user.email}).lean();
 
-  return Response.json({...user, ...userInfo});
+  return Response.json({...user, ...pharmacistInfo});
 
 }

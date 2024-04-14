@@ -9,15 +9,15 @@ export async function GET() {
   const users = await User.aggregate([
     {
       $lookup: {
-        from: "userinfos", // the collection to join
+        from: "pharmacistinfos", // the collection to join
         localField: "email", // field from the users collection
         foreignField: "email", // field from the userInfo collection
-        as: "userinfos", // output array field
+        as: "pharmacistinfos", // output array field
       },
     },
     {
       $match: {
-        userinfos: { $ne: [] }, // filter to include only users with corresponding userInfo
+        pharmacistinfos: { $ne: [] }, // filter to include only users with corresponding userInfo
       },
     },
     {
@@ -25,7 +25,7 @@ export async function GET() {
         _id: 1,
         name: 1,
         email: 1,
-        userinfos: 1,
+        pharmacistinfos: 1,
       },
     },
   ]);

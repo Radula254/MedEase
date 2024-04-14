@@ -14,7 +14,7 @@ export default function Hero() {
       <br />
       <p>Health is wealth which is priceless!!</p>
       <br />
-      <button>Heal Here</button>
+      <button className={styles.button}>Heal Here</button>
     </section>
   );
 }

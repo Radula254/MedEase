@@ -3,16 +3,36 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "./Header.module.css";
 import { signOut, useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
 
 export default function Header() {
   const session = useSession();
   const status = session?.status;
+  const [user, setUser] = useState(null);
+  const [isPatient, setIsPatient] = useState(false);
+  const [isPharmacist, setIsPharmacist] = useState(false)
   console.log(session)
   const userData = session.data?.user;
   let userName = userData?.name || userData?.email;
   if (userName && userName.includes(' ')) {
     userName = userName.split(' ')[0];
   }
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      fetch("/api/profile").then((response) => {
+        response.json().then((data) => {
+          if (data.pharmacistCheck === true ) {
+            setIsPharmacist(true);
+            setIsPatient(false);
+          } else {
+            setIsPatient(true);
+            setIsPharmacist(false);
+          }
+        });
+      });
+    }
+  }, [session, status]);
 
   return (
     <header className={styles.header}>
@@ -26,12 +46,20 @@ export default function Header() {
         <li className={styles.navbarLi}><Link href={'/about'} className={styles.navbarLiLink}>About</Link></li>
       </nav>
       )}
-      {status === 'authenticated' && (
+      {status === 'authenticated' && isPatient && (
         <nav className={styles.navbarr}>
         <li className={styles.navbarLi}><Link href={'/'} className={styles.navbarLiLink}>Home</Link></li>
         <li className={styles.navbarLi}><Link href={'/services'} className={styles.navbarLiLink}>Services</Link></li>
         <li className={styles.navbarLi}><Link href={'/about'} className={styles.navbarLiLink}>About</Link></li>
-        <li className={styles.navbarLi}><Link href={'/appoinntment'} className={styles.navbarLiLink}>Appointment</Link></li>
+        <li className={styles.navbarLi}><Link href={'/users'} className={styles.navbarLiLink}>Appointment</Link></li>
+      </nav>
+      )}
+      {status === 'authenticated' && isPharmacist && (
+        <nav className={styles.navbarr}>
+        <li className={styles.navbarLi}><Link href={'/'} className={styles.navbarLiLink}>Home</Link></li>
+        <li className={styles.navbarLi}><Link href={'/services'} className={styles.navbarLiLink}>Services</Link></li>
+        <li className={styles.navbarLi}><Link href={'/about'} className={styles.navbarLiLink}>About</Link></li>
+        <li className={styles.navbarLi}><Link href={'/pharma'} className={styles.navbarLiLink}>DashBoard</Link></li>
       </nav>
       )}
       <nav className={styles.navbar}>

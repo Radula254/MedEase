@@ -22,11 +22,12 @@
 
 }
 
-.hero button {
+.hero .button {
     background-image: url("/heroButton.png");
     background-color: transparent;
     color: #080101;
     border: 0;
+    width: auto;
     padding: 14px 80px 14px 65px;
     background-repeat: no-repeat;
     border-width: 3px;

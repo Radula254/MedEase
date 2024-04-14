@@ -15,8 +15,8 @@ export default function AdminDataDisplay() {
                     <h3>Doctors</h3>
                 </div>
                 <div className={styles.dataCard}>
-                    <Link href={'/'} className={styles.Link}><Image src={'/DataDisplay.png'} width={100} height={100} className={styles.image}  alt="Data Display Picture"/></Link>
-                    <h3>Doctors</h3>
+                    <Link href={'/admin/pharmacistDisplay'} className={styles.Link}><Image src={'/DataDisplay.png'} width={100} height={100} className={styles.image}  alt="Data Display Picture"/></Link>
+                    <h3>pharmacists</h3>
                 </div>
                 <div className={styles.dataCard}>
                     <Link href={'/'} className={styles.Link}><Image src={'/DataDisplay.png'} width={100} height={100} className={styles.image}  alt="Data Display Picture"/></Link>

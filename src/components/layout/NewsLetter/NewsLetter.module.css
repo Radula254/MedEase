@@ -48,6 +48,8 @@
     font-size: 14px;
     font-weight: 600;
     padding: 15px 30px;
+    width: auto;
+    height: 50px;
     background-color: #3B7BA6;
     color: #fff;
     border-radius: 4px;

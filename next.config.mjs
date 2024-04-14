@@ -8,7 +8,7 @@ const nextConfig = {
             },
             {
                 protocol: 'https',
-                hostname: 'medease.s3.amazonaws.com', // Corrected hostname
+                hostname: 'medease.s3.amazonaws.com',
             },
         ]
     }

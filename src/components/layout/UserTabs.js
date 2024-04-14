@@ -1,19 +1,23 @@
-'use client';
+"use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export default function UserTabs({isPatient}) {
-    
-    const path = usePathname();
+export default function UserTabs({ isPatient, isPharmacist }) {
+  const path = usePathname();
 
   return (
     <div className="flex gap-2 tabs justify-center">
-      <Link className={path === '/profile' ? 'active' : ''} href={"/profile"}>
+      <Link className={path === "/profile" ? "active" : ""} href={"/profile"}>
         Profile
       </Link>
       {isPatient && (
         <>
-          <Link className={path.includes('/appointments') ? 'active' : ''} href={'/appointments'}>Appointments</Link>
+          <Link
+            className={path.includes("/appointments") ? "active" : ""}
+            href={"/appointments"}
+          >
+            Appointments
+          </Link>
         </>
       )}
     </div>

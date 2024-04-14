@@ -11,7 +11,7 @@ export default function AdminNavbar() {
         </div>
         <ul className={styles.roleList}>
           <li>
-            <Link href={"/"} className={styles.Link}>
+            <Link href={"/admin/addAdmin"} className={styles.Link}>
               Admin
             </Link>
           </li>
@@ -21,13 +21,13 @@ export default function AdminNavbar() {
             </Link>
           </li>
           <li>
-            <Link href={"/"} className={styles.Link}>
+            <Link href={"/admin/addDoctor"} className={styles.Link}>
               Doctor
             </Link>
           </li>
           <li>
-            <Link href={"/"} className={styles.Link}>
-              Nurse
+            <Link href={"/admin/addPharmacist"} className={styles.Link}>
+              Pharmacist
             </Link>
           </li>
           <li>
