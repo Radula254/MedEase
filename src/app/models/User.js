@@ -6,7 +6,12 @@ const UserSchema = new Schema(
     email: { type: String, required: true, unique: true },
     password: {type: String},
     image: { type: String },
-    staff: {type: Boolean, default: false},
+    admin: {type: Boolean, default: false},
+    doctor: {type: Boolean, default: false},
+    pharmacist: {type: Boolean, default: false},
+    nurse: {type: Boolean, default: false},
+    receptionist: {type: Boolean, default: false},
+    labTech: {type: Boolean, default: false},
   },
   { timestamps: true }
 );

@@ -1,15 +1,14 @@
 "use client";
-import UserTabs from "@/components/layout/UserTabs";
 import { useProfile } from "../../components/UseProfile";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-export default function UsersPage() {
+export default function DoctorsPage() {
   const [users, setUsers] = useState([]);
   const { loading: profileLoading, data: profileData } = useProfile();
 
   useEffect(() => {
-    fetch("/api/allStaff").then((response) => {
+    fetch("/api/receptionists").then((response) => {
       response.json().then((users) => {
         setUsers(users);
       });
@@ -38,7 +37,7 @@ export default function UsersPage() {
                 <span className="text-gray-500">{user.email}</span>
               </div>
               <div>
-                <Link className="button" href={"/users/" + user._id}>
+                <Link className="button" href={"/addReceptionist/" + user._id}>
                   Edit
                 </Link>
               </div>

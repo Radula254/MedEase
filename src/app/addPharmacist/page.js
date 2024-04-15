@@ -9,7 +9,7 @@ export default function UsersPage() {
   const { loading: profileLoading, data: profileData } = useProfile();
 
   useEffect(() => {
-    fetch("/api/allStaff").then((response) => {
+    fetch("/api/pharmacy").then((response) => {
       response.json().then((users) => {
         setUsers(users);
       });
@@ -38,7 +38,7 @@ export default function UsersPage() {
                 <span className="text-gray-500">{user.email}</span>
               </div>
               <div>
-                <Link className="button" href={"/users/" + user._id}>
+                <Link className="button" href={"/addPharmacist/" + user._id}>
                   Edit
                 </Link>
               </div>

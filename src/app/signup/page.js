@@ -24,6 +24,7 @@ export default function SignupPage() {
     }
     else {
       setUserCreated(true);
+      setStaff(true);
     }
     setCreatingUser(false);
   }

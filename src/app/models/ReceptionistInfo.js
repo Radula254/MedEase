@@ -1,6 +1,6 @@
 import { model, models, Schema } from "mongoose";
 
-const DoctorInfoSchema = new Schema(
+const ReceptionistInfoSchema = new Schema(
   {
     email: { type: String, required: true, unique: true },
     phone: { type: String },
@@ -14,5 +14,5 @@ const DoctorInfoSchema = new Schema(
   { timestamps: true }
 );
 
-export const DoctorInfo = models?.DoctorInfo || model('DoctorInfo', DoctorInfoSchema);
+export const ReceptionistInfo = models?.ReceptionistInfo || model('ReceptionistInfo', ReceptionistInfoSchema);
 

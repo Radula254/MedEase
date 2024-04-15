@@ -21,7 +21,7 @@ export default function AdminNavbar() {
             </Link>
           </li>
           <li>
-            <Link href={"/admin/addDoctor"} className={styles.Link}>
+            <Link href={"/addDoctor"} className={styles.Link}>
               Doctor
             </Link>
           </li>

@@ -49,3 +49,7 @@ div.tabs > * {
 div.tabs > *.active {
   @apply bg-primary text-white;
 }
+
+th, td {
+  @apply text-base
+}

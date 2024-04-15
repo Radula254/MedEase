@@ -9,7 +9,7 @@ const PharmacistInfoSchema = new Schema(
     city: { type: String },
     country: { type: String },
     salary: {type: String},
-    pharmacistCheck: {type: Boolean, default: true}
+    staff: {type: Boolean, default: true}
   },
   { timestamps: true }
 );

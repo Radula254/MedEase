@@ -12,7 +12,7 @@ export default function EditUserPage() {
   const { id } = useParams();
 
   useEffect(() => {
-    fetch("/api/pharmacist?_id=" + id).then((res) => {
+    fetch("/api/nurse?_id=" + id).then((res) => {
       res.json().then(user => {
         setUser(user);
       });
@@ -22,7 +22,7 @@ export default function EditUserPage() {
   async function handleSaveButtonClick(ev, data) {
     ev.preventDefault();
     const savePromise = new Promise(async (resolve, reject) => {
-      const response = await fetch("/api/pharmacist", {
+      const response = await fetch("/api/nurse", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...data, _id: id }),
