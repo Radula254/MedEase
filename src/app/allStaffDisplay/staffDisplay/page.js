@@ -7,7 +7,7 @@ export default function DoctorsPage() {
   const { loading: profileLoading, data: profileData } = useProfile();
 
   useEffect(() => {
-    fetch("/api/receptionists").then((response) => {
+    fetch("/api/allStaff").then((response) => {
       response.json().then((users) => {
         setUsers(users);
       });
@@ -28,7 +28,7 @@ export default function DoctorsPage() {
     <section className="mx-auto mt-8 mb-20 px-3">
       <div className="mt-8">
         <h1 className="text-center font-bold text-xl underline mb-3">
-          MedEase Receptionists Details
+          MedEase Staff Details
         </h1>
         {users?.length > 0 && (
           <table className="table table-bordered">
@@ -51,12 +51,12 @@ export default function DoctorsPage() {
                   <td>{index + 1}</td>
                   <td>{user.name}</td>
                   <td>{user.email}</td>
-                  <td>{user.receptionistInfo.city || "N/A"}</td>
-                  <td>{user.receptionistInfo.country || "N/A"}</td>
-                  <td>{user.receptionistInfo.phone || "N/A"}</td>
-                  <td>{user.receptionistInfo.postalCode || "N/A"}</td>
-                  <td>{user.receptionistInfo.salary || "N/A"}</td>
-                  <td>{user.receptionistInfo.streetAddress || "N/A"}</td>
+                  <td>{user.city || "N/A"}</td>
+                  <td>{user.country || "N/A"}</td>
+                  <td>{user.phone || "N/A"}</td>
+                  <td>{user.postalCode || "N/A"}</td>
+                  <td>{user.salary || "N/A"}</td>
+                  <td>{user.streetAddress || "N/A"}</td>
                 </tr>
               ))}
             </tbody>

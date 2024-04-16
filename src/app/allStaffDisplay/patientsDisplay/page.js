@@ -7,7 +7,7 @@ export default function DoctorsPage() {
   const { loading: profileLoading, data: profileData } = useProfile();
 
   useEffect(() => {
-    fetch("/api/receptionists").then((response) => {
+    fetch("/api/users").then((response) => {
       response.json().then((users) => {
         setUsers(users);
       });
@@ -22,13 +22,11 @@ export default function DoctorsPage() {
     return "Unauthorised!!!";
   }
 
-  console.log(users);
-
   return (
     <section className="mx-auto mt-8 mb-20 px-3">
       <div className="mt-8">
         <h1 className="text-center font-bold text-xl underline mb-3">
-          MedEase Receptionists Details
+          MedEase Patients Details
         </h1>
         {users?.length > 0 && (
           <table className="table table-bordered">
@@ -41,7 +39,6 @@ export default function DoctorsPage() {
                 <th>Country</th>
                 <th>Phone</th>
                 <th>Postal Code</th>
-                <th>Salary</th>
                 <th>Street Address</th>
               </tr>
             </thead>
@@ -51,12 +48,11 @@ export default function DoctorsPage() {
                   <td>{index + 1}</td>
                   <td>{user.name}</td>
                   <td>{user.email}</td>
-                  <td>{user.receptionistInfo.city || "N/A"}</td>
-                  <td>{user.receptionistInfo.country || "N/A"}</td>
-                  <td>{user.receptionistInfo.phone || "N/A"}</td>
-                  <td>{user.receptionistInfo.postalCode || "N/A"}</td>
-                  <td>{user.receptionistInfo.salary || "N/A"}</td>
-                  <td>{user.receptionistInfo.streetAddress || "N/A"}</td>
+                  <td>{user.userInfo.city || "N/A"}</td>
+                  <td>{user.userInfo.country || "N/A"}</td>
+                  <td>{user.userInfo.phone || "N/A"}</td>
+                  <td>{user.userInfo.postalCode || "N/A"}</td>
+                  <td>{user.userInfo.streetAddress || "N/A"}</td>
                 </tr>
               ))}
             </tbody>

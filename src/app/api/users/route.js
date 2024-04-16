@@ -1,40 +1,20 @@
-import { User } from "@/app/models/User";
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
+import { User } from "../../models/User";;
+import { UserInfo } from '@/app/models/UserInfo';
 
 export async function GET() {
-  // Ensure the connection to MongoDB
-  mongoose.connect(process.env.NEXT_PUBLIC_MONGOURL);
+    mongoose.connect(process.env.NEXT_PUBLIC_MONGOURL);
+    const users = await User.find({ admin: false, doctor: false, nurse: false, receptionist: false, labTech: false,  });
 
-  // Using aggregation to perform a join operation with the UserInfo collection
-  const users = await User.aggregate([
-    {
-      $lookup: {
-        from: "userinfos", // the collection to join
-        localField: "email", // field from the users collection
-        foreignField: "email", // field from the userInfo collection
-        as: "userinfos", // output array field
-      },
-    },
-    {
-      $match: {
-        userinfos: { $ne: [] }, // filter to include only users with corresponding userInfo
-      },
-    },
-    {
-      $project: {
-        _id: 1,
-        name: 1,
-        email: 1,
-        userinfos: 1,
-      },
-    },
-  ]);
+    const usersWithDetails = [];
 
-  // Convert the result to JSON and return the response
-  return new Response(JSON.stringify(users), {
-    headers: {
-      "Content-Type": "application/json",
-    },
-    status: 200,
-  });
+    for (const user of users) {
+        const userInfo = await UserInfo.findOne({ email: user.email }).lean();
+        usersWithDetails.push({
+            ...user.toObject(),
+            userInfo
+        });
+    }
+
+    return Response.json(usersWithDetails);
 }

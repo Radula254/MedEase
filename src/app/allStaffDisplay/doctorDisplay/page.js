@@ -23,40 +23,46 @@ export default function DoctorsPage() {
     return "Unauthorised!!!";
   }
 
-  console.log(users)
+  console.log(users);
 
   return (
     <section className="mx-auto mt-8 mb-20 px-3">
       <div className="mt-8">
-        <h1 className="text-center font-bold text-xl underline mb-3">MedEase Doctors' Details</h1>
-        {users?.length > 0 &&
-        <table className="table table-bordered">
+        <h1 className="text-center font-bold text-xl underline mb-3">
+          MedEase Doctors Details
+        </h1>
+        {users?.length > 0 && (
+          <table className="table table-bordered">
             <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>City</th>
-                    <th>Country</th>
-                    <th>Phone</th>
-                    <th>Postal Code</th>
-                    <th>Salary</th>
-                    <th>Street Address</th>
-                </tr>
+              <tr>
+                <th>No</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>City</th>
+                <th>Country</th>
+                <th>Phone</th>
+                <th>Postal Code</th>
+                <th>Salary</th>
+                <th>Street Address</th>
+              </tr>
             </thead>
             <tbody>
-           { users.map(user => <tr key={users._id}>
-            <td>{user.name}</td>
-            <td>{user.email}</td>
-            <td>{user.doctorInfo.city}</td>
-            <td>{user.doctorInfo.country}</td>
-            <td>{user.doctorInfo.phone}</td>
-            <td>{user.doctorInfo.postalCode}</td>
-            <td>{user.doctorInfo.salary}</td>
-            <td>{user.doctorInfo.streetAddress}</td>
-           </tr>)}
+              {users.map((user, index) => (
+                <tr key={users._id || index}>
+                  <td>{index + 1}</td>
+                  <td>{user.name}</td>
+                  <td>{user.email}</td>
+                  <td>{user.doctorInfo.city || "N/A"}</td>
+                  <td>{user.doctorInfo.country || "N/A"}</td>
+                  <td>{user.doctorInfo.phone || "N/A"}</td>
+                  <td>{user.doctorInfo.postalCode || "N/A"}</td>
+                  <td>{user.doctorInfo.salary || "N/A"}</td>
+                  <td>{user.doctorInfo.streetAddress || "N/A"}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
-          }
+        )}
       </div>
     </section>
   );

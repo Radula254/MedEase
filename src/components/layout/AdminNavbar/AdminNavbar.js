@@ -11,13 +11,8 @@ export default function AdminNavbar() {
         </div>
         <ul className={styles.roleList}>
           <li>
-            <Link href={"/admin/addAdmin"} className={styles.Link}>
+            <Link href={"/addAdmin"} className={styles.Link}>
               Admin
-            </Link>
-          </li>
-          <li>
-            <Link href={"/"} className={styles.Link}>
-              Manager
             </Link>
           </li>
           <li>
@@ -26,12 +21,22 @@ export default function AdminNavbar() {
             </Link>
           </li>
           <li>
-            <Link href={"/admin/addPharmacist"} className={styles.Link}>
+            <Link href={"/addPharmacist"} className={styles.Link}>
               Pharmacist
             </Link>
           </li>
           <li>
-            <Link href={"/"} className={styles.Link}>
+            <Link href={"/addLabTech"} className={styles.Link}>
+              Lab Technician
+            </Link>
+          </li>
+          <li>
+            <Link href={"/addNurse"} className={styles.Link}>
+              Nurse
+            </Link>
+          </li>
+          <li>
+            <Link href={"/addReceptionist"} className={styles.Link}>
               Receptionist
             </Link>
           </li>
