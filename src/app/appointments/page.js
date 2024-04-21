@@ -1,22 +1,51 @@
 "use client";
-import AppointmentForm from "@/components/layout/AppointmentForm";
-import { useProfile } from "@/components/UseProfile";
+import UserTabs from "@/components/layout/UserTabs";
+import { useProfile } from "../../components/UseProfile";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
-export default function AppointmentsPage() {
-    const {loading:profileLoaing, data:profileData} =  useProfile();
+export default function UsersPage() {
+  const [users, setUsers] = useState([]);
+  const { loading: profileLoading, data: profileData } = useProfile();
 
-    if (profileLoaing) {
-        return 'Loading...';
-    }
+  useEffect(() => {
+    fetch("/api/users").then((response) => {
+      response.json().then((users) => {
+        setUsers(users);
+      });
+    });
+  });
 
-    if (!profileData.patient) {
-        return 'Not a Patient';
-    }
-    return(
-        <section className="mt-10 max-w-4xl mx-auto mb-20">
-            <h1 className="mb-4 text-center font-bold text-xl">Appointment</h1>
-            <AppointmentForm user={null} />
-        </section>
-    )
+  if (profileLoading) {
+    return "Loading ...";
+  }
+
+  if (!profileData.doctor) {
+    return "Unauthorised!!!";
+  }
+
+  return (
+    <section className="max-w-2xl mx-auto mt-8">
+      <UserTabs isAdmin={true} />
+      <div className="mt-8">
+        {users?.length > 0 &&
+          users.map((user) => (
+            <div className="bg-gray-100 rounded-lg mb-2 p-1 px-4 flex items-center gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4 grow">
+                <div className="text-gray-700">
+                  {!!user.name && <span>{user.name}</span>}
+                  {!user.name && <span className="italic">No Name</span>}
+                </div>
+                <span className="text-gray-500">{user.email}</span>
+              </div>
+              <div>
+                <Link className="button" href={"/appointments/" + user._id}>
+                  Edit
+                </Link>
+              </div>
+            </div>
+          ))}
+      </div>
+    </section>
+  );
 }

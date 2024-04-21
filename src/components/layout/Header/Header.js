@@ -10,8 +10,7 @@ export default function Header() {
   const status = session?.status;
   const [user, setUser] = useState(null);
   const [isPatient, setIsPatient] = useState(false);
-  const [isPharmacist, setIsPharmacist] = useState(false)
-  console.log(session)
+  const [isPharmacist, setIsPharmacist] = useState(false);
   const userData = session.data?.user;
   let userName = userData?.name || userData?.email;
   if (userName && userName.includes(' ')) {

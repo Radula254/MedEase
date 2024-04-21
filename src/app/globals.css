@@ -17,7 +17,8 @@ input[type="email"]:disabled,
 input[type="password"]:disabled,
 input[type="text"]:disabled,
 input[type="name"]:disabled,
-input[type="tel"]:disabled {
+input[type="tel"]:disabled,
+textarea:disabled {
   @apply bg-gray-300 border-0 cursor-not-allowed text-gray-500;
 }
 

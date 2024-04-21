@@ -13,8 +13,6 @@ export default function UserForm({ user, onSave }) {
   const [salary, setSalary] = useState(user?.salary || "");
   const { data: loggedInUserData } = useProfile();
 
-  console.log({ user });
-
   return (
     <div className="flex gap-4 ">
       <div>

@@ -1,22 +1,29 @@
-import { model, models, Schema } from "mongoose";
+import mongoose, {model, models, Schema} from "mongoose";
+
+const DrugsGivenSchema = new Schema({
+  medication: String,
+  price: Number,
+})
 
 const AppointmentInfoSchema = new Schema(
   {
-    email: { type: String, required: true, unique: true },
+    email: { type: String, required: true},
     createdAppointment: { type: Boolean, default: false },
-    nurse: { type: mongoose.Types.ObjectId },
+    selectedNurse: { type: mongoose.Types.ObjectId },
     height: { type: String },
     weight: { type: String },
     heartRate: { type: String },
     preConditions: { type: String },
     consultationPrice: { type: String },
     status: { type: Boolean, default: false },
-    doctor: { type: mongoose.Types.ObjectId },
+    selectedDoctor: { type: mongoose.Types.ObjectId },
     labResultStatus: {type: Boolean, default: false},
     labResults: { type: String },
+    labResultsDone: {type: Boolean, default: false},
+    diagnosis: { type: String },
     prescriptionsAndFrequency: {type: String},
     consulted: { type: Boolean, default: false },
-    drugsGiven: { type: mongoose.Types.ObjectId },
+    drugs: {type:[DrugsGivenSchema]},
     total: {type: String},
     paymentStatus: {type: Boolean, default: false},
   },
