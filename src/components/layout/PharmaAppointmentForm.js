@@ -4,10 +4,9 @@ import Trash from "../icons/Trash";
 import Plus from "../icons/Plus";
 
 export default function PharmaAppointmentForm({ user, onSave }) {
-  const [prescriptionsAndFrequency, setPrescriptionsAndFrequency] = useState(
-    user?.prescriptionsAndFrequency || ""
-  );
+  const [prescriptionsAndFrequency, setPrescriptionsAndFrequency] = useState(user?.prescriptionsAndFrequency || "");
   const [drugs, setDrugs] = useState([]);
+
 
   function adddrugs() {
     setDrugs((oldDrugs) => {
@@ -43,7 +42,6 @@ export default function PharmaAppointmentForm({ user, onSave }) {
         className="grow"
         onSubmit={(ev) =>
           onSave(ev, {
-            prescriptionsAndFrequency,
             drugs,
           })
         }
@@ -62,7 +60,7 @@ export default function PharmaAppointmentForm({ user, onSave }) {
           type="text"
           placeholder="Prescriptions and Frequency"
           value={prescriptionsAndFrequency}
-          onChange={(ev) => setPrescriptionsAndFrequency(ev.target.value)}
+          disabled={true}
         />
         <div className="bg-gray-200 p-2 rounded-md mb-2">
           <label className="pl-2">Medication:</label>

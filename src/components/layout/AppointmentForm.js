@@ -6,7 +6,6 @@ export default function AppointmentForm({user, onSave}) {
   const [weight, setWeight] = useState('');
   const [heartRate, setHeartRate] = useState('');
   const [preConditions, setPreConditions] = useState('');
-  const [consultationPrice, setConsultationPrice] = useState('');
   const [status, setStatus] = useState(false);
   const [doctor, setDoctor] = useState([]);
   const [selectedDoctor, setSelectedDoctor] = useState('');
@@ -21,7 +20,7 @@ export default function AppointmentForm({user, onSave}) {
   }, []);
 
   function handleConsultationChange(ev) {
-    setConsultationPrice(ev.target.value);
+    setPreConditions(ev.target.value)
     setStatus(true);
   }
 
@@ -42,7 +41,6 @@ export default function AppointmentForm({user, onSave}) {
            weight,
            heartRate,
            preConditions,
-           consultationPrice,
            status,
            selectedDoctor,
           })
@@ -83,22 +81,15 @@ export default function AppointmentForm({user, onSave}) {
           type="text"
           placeholder="Pre-Conditions"
           value={preConditions}
-          onChange={(ev) => setPreConditions(ev.target.value)}
+          onChange={handleConsultationChange}
         />
         <label>Doctor</label>
         <select value={selectedDoctor} onChange={(ev) => setSelectedDoctor(ev.target.value)}>
-        <option value="" disabled selected>Select a category</option>
+        <option value="" disabled selected>Assign a doctor</option>
           {doctor?.length > 0 && doctor.map(d => (
             <option value={d._id}>{d.name}</option>
           ))}
         </select>
-        <label>Consultation Price</label>
-        <input
-          type="text"
-          placeholder="Consultation Price"
-          value={consultationPrice}
-          onChange={handleConsultationChange}
-        />
         <button
           type="submit"
           className="block w-full text-gray-700 font-semibold border border-gray-300 rounded-xl px-6 py-2"

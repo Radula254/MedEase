@@ -9,7 +9,7 @@ export default function UsersPage() {
   const { loading: profileLoading, data: profileData } = useProfile();
 
   useEffect(() => {
-    fetch("/api/users").then((response) => {
+    fetch("/api/appointments").then((response) => {
       response.json().then((users) => {
         setUsers(users);
       });

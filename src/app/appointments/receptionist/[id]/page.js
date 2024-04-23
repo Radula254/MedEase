@@ -7,8 +7,9 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import toast from "react-hot-toast";
 import AppointmentForm from "@/components/layout/AppointmentForm";
+import ReceptionistForm from "@/components/layout/ReceptionistForm";
 
-export default function EditUserPage() {
+export default function BookingAppointmentPage() {
   const [user, setUser] = useState(null);
   const { loading: profileLoading, data: profileData } = useProfile();
   const { id } = useParams();
@@ -38,7 +39,7 @@ export default function EditUserPage() {
 
     await toast.promise(savePromise, {
       loading: "Saving...",
-      success: "Profile Saved",
+      success: "Saved",
       error: "Error saving!!",
     });
   }
@@ -52,9 +53,9 @@ export default function EditUserPage() {
   }
 
   return (
-    <section className="mt-8 mx-auto max-w-2xl">
+    <section className="mt-8 mx-auto max-w-2xl mb-20">
       <div className="max-w-2xl mx-auto mt-8">
-        <AppointmentForm user={user} onSave={handleSaveButtonClick} />
+        <ReceptionistForm user={user} onSave={handleSaveButtonClick} />
       </div>
     </section>
   );

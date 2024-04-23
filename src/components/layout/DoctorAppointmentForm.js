@@ -8,10 +8,16 @@ export default function DoctorAppointmentForm({user, onSave}) {
   const [labResults, setLabResults] = useState(user?.labResults || '');
   const [prescriptionsAndFrequency, setPrescriptionsAndFrequency] = useState(user?.prescriptionsAndFrequency || '');
   const [labResultStatus, setLabResultStatus] = useState(user?.labResultStatus || false);
+  const [consulted, setConsulted] = useState(user?.consulted || false);
 
   function handleLabratoryTest() {
     setLabResultStatus(true);
     toast.success('Lab Test Requested');
+  }
+
+  function handleDiagnosisChange(ev) {
+    setDiagnosis(ev.target.value);
+    setConsulted(true);
   }
 
   return (
@@ -28,6 +34,7 @@ export default function DoctorAppointmentForm({user, onSave}) {
            diagnosis,
            prescriptionsAndFrequency,
            labResultStatus,
+           consulted,
           })
         }
       >
@@ -55,7 +62,7 @@ export default function DoctorAppointmentForm({user, onSave}) {
           type="text"
           placeholder="Diagnosis"
           value={diagnosis}
-          onChange={(ev) => setDiagnosis(ev.target.value)}
+          onChange={handleDiagnosisChange}
         />
         <label>Prescriptions and Frequency</label>
         <textarea

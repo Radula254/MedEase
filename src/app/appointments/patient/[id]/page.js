@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import toast from "react-hot-toast";
 import AppointmentForm from "@/components/layout/AppointmentForm";
+import PatientAppointmentForm from "@/components/layout/PatientAppointmentForm";
 
 export default function EditUserPage() {
   const [user, setUser] = useState(null);
@@ -25,7 +26,7 @@ export default function EditUserPage() {
     ev.preventDefault();
     const savePromise = new Promise(async (resolve, reject) => {
       const response = await fetch("/api/appointments", {
-        method: "PUT",
+        method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...data, _id: id }),
       });
@@ -38,7 +39,7 @@ export default function EditUserPage() {
 
     await toast.promise(savePromise, {
       loading: "Saving...",
-      success: "Profile Saved",
+      success: "Saved",
       error: "Error saving!!",
     });
   }
@@ -47,14 +48,10 @@ export default function EditUserPage() {
     return "Loading ...";
   }
 
-  if (!profileData.doctor) {
-    return "Unauthorised!!!";
-  }
-
   return (
     <section className="mt-8 mx-auto max-w-2xl">
       <div className="max-w-2xl mx-auto mt-8">
-        <AppointmentForm user={user} onSave={handleSaveButtonClick} />
+        <PatientAppointmentForm user={user} onSave={handleSaveButtonClick} />
       </div>
     </section>
   );

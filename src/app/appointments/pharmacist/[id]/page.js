@@ -38,8 +38,8 @@ export default function EditUserPage() {
     });
 
     await toast.promise(savePromise, {
-      loading: "Adding...",
-      success: "Drugs Added",
+      loading: "Dispensing...",
+      success: "Drugs Dispensed",
       error: "Error saving!!",
     });
   }

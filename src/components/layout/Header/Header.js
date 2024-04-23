@@ -11,6 +11,7 @@ export default function Header() {
   const [user, setUser] = useState(null);
   const [isPatient, setIsPatient] = useState(false);
   const [isPharmacist, setIsPharmacist] = useState(false);
+  const [userId, setUserId] = useState(null);
   const userData = session.data?.user;
   let userName = userData?.name || userData?.email;
   if (userName && userName.includes(' ')) {
@@ -28,6 +29,8 @@ export default function Header() {
             setIsPatient(true);
             setIsPharmacist(false);
           }
+          setUserId(data._id)
+          console.log(data._id)
         });
       });
     }
@@ -50,7 +53,7 @@ export default function Header() {
         <li className={styles.navbarLi}><Link href={'/'} className={styles.navbarLiLink}>Home</Link></li>
         <li className={styles.navbarLi}><Link href={'/services'} className={styles.navbarLiLink}>Services</Link></li>
         <li className={styles.navbarLi}><Link href={'/about'} className={styles.navbarLiLink}>About</Link></li>
-        <li className={styles.navbarLi}><Link href={'/users'} className={styles.navbarLiLink}>Appointment</Link></li>
+        <li className={styles.navbarLi}><Link href={'/appointments/patient/' + userId} className={styles.navbarLiLink}>Appointment</Link></li>
       </nav>
       )}
       {status === 'authenticated' && isPharmacist && (
