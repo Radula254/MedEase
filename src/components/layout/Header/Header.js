@@ -30,7 +30,6 @@ export default function Header() {
             setIsPharmacist(false);
           }
           setUserId(data._id)
-          console.log(data._id)
         });
       });
     }

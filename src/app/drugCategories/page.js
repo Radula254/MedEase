@@ -8,6 +8,7 @@ import Image from "next/image";
 export default function DrugCategoriesPage() {
     const [category, setCategory] = useState("");
     const {loading, data} = useProfile();
+    const isPharmacist = data.pharmacist;
 
     useEffect(() => {
         fetch('/api/drugCategory').then(res => {
@@ -21,18 +22,24 @@ export default function DrugCategoriesPage() {
         return 'Loading...';
     }
 
-    if (!data.patient) {
-        return 'Not an patient';
+    if (!data.pharmacist && !data.admin) {
+        return (
+            <div className="text-center my-28 font-extrabold text-5xl">
+                <p style={{ color: 'red' }}>Unauthorised!!!</p>
+            </div>
+          )
     }
 
     return(
         <section className="mt-10 mb-20 max-w-2xl mx-auto">
-            <div className="mt-8">
+            {isPharmacist && (
+                <div className="mt-8">
                 <Link className="button flex" href={"/drugCategories/new"}>
                     <span>Create a new drug category</span>
                     <Right />
                 </Link>
             </div>
+            )}
             <div>
             <h2 className="text-sm text-gray-500 mt-8">Edit drug category:</h2>
                 <div className="grid grid-cols-3 gap-2">

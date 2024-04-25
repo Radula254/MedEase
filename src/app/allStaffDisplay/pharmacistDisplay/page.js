@@ -18,11 +18,13 @@ export default function DoctorsPage() {
     return "Loading ...";
   }
 
-  if (!profileData.patient) {
-    return "Unauthorised!!!";
+  if (!profileData.admin) {
+    return (
+      <div className="text-center my-28 font-extrabold text-5xl">
+          <p style={{ color: 'red' }}>Unauthorised!!!</p>
+      </div>
+    )
   }
-
-  console.log(users);
 
   return (
     <section className="mx-auto mt-8 mb-20 px-3">

@@ -18,11 +18,13 @@ export default function DoctorsPage() {
     return "Loading ...";
   }
 
-  if (!profileData.patient) {
-    return "Unauthorised!!!";
+  if (!profileData.admin) {
+    return (
+      <div className="text-center my-28 font-extrabold text-5xl">
+          <p style={{ color: 'red' }}>Unauthorised!!!</p>
+      </div>
+    )
   }
-
-  console.log(users);
 
   return (
     <section className="mx-auto mt-8 mb-20 px-3">
@@ -51,12 +53,12 @@ export default function DoctorsPage() {
                   <td>{index + 1}</td>
                   <td>{user.name}</td>
                   <td>{user.email}</td>
-                  <td>{user.labTechInfo.city || "N/A"}</td>
-                  <td>{user.labTechInfo.country || "N/A"}</td>
-                  <td>{user.labTechInfo.phone || "N/A"}</td>
-                  <td>{user.labTechInfo.postalCode || "N/A"}</td>
-                  <td>{user.labTechInfo.salary || "N/A"}</td>
-                  <td>{user.labTechInfo.streetAddress || "N/A"}</td>
+                  <td>{user.labTechInfo?.city || "N/A"}</td>
+                  <td>{user.labTechInfo?.country || "N/A"}</td>
+                  <td>{user.labTechInfo?.phone || "N/A"}</td>
+                  <td>{user.labTechInfo?.postalCode || "N/A"}</td>
+                  <td>{user.labTechInfo?.salary || "N/A"}</td>
+                  <td>{user.labTechInfo?.streetAddress || "N/A"}</td>
                 </tr>
               ))}
             </tbody>

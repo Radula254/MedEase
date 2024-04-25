@@ -20,8 +20,12 @@ export default function UsersPage() {
     return "Loading ...";
   }
 
-  if (!profileData.patient) {
-    return "Unauthorised!!!";
+  if (!profileData.admin) {
+    return (
+      <div className="text-center my-28 font-extrabold text-5xl">
+          <p style={{ color: 'red' }}>Unauthorised!!!</p>
+      </div>
+    )
   }
 
   return (

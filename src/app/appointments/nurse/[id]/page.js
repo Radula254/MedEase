@@ -47,8 +47,12 @@ export default function EditUserPage() {
     return "Loading ...";
   }
 
-  if (!profileData.doctor) {
-    return "Unauthorised!!!";
+  if (!profileData.nurse) {
+    return (
+      <div className="text-center my-28 font-extrabold text-5xl">
+          <p style={{ color: 'red' }}>Unauthorised!!!</p>
+      </div>
+    )
   }
 
   return (

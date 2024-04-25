@@ -20,8 +20,12 @@ export default function DoctorsPage() {
     return "Loading ...";
   }
 
-  if (!profileData.patient) {
-    return "Unauthorised!!!";
+  if (!profileData.admin) {
+    return (
+      <div className="text-center my-28 font-extrabold text-5xl">
+          <p style={{ color: 'red' }}>Unauthorised!!!</p>
+      </div>
+    )
   }
 
   return (
@@ -79,12 +83,12 @@ export default function DoctorsPage() {
                   <td>{index + 1}</td>
                   <td>{user.name}</td>
                   <td>{user.email}</td>
-                  <td>{user.nurseInfo.city || "N/A"}</td>
-                  <td>{user.nurseInfo.country || "N/A"}</td>
-                  <td>{user.nurseInfo.phone || "N/A"}</td>
-                  <td>{user.nurseInfo.postalCode || "N/A"}</td>
-                  <td>{user.nurseInfo.salary || "N/A"}</td>
-                  <td>{user.nurseInfo.streetAddress || "N/A"}</td>
+                  <td>{user.nurseInfo?.city || "N/A"}</td>
+                  <td>{user.nurseInfo?.country || "N/A"}</td>
+                  <td>{user.nurseInfo?.phone || "N/A"}</td>
+                  <td>{user.nurseInfo?.postalCode || "N/A"}</td>
+                  <td>{user.nurseInfo?.salary || "N/A"}</td>
+                  <td>{user.nurseInfo?.streetAddress || "N/A"}</td>
                 </tr>
               ))}
             </tbody>

@@ -21,7 +21,7 @@ export default function UsersPage() {
     return "Loading ...";
   }
 
-  if (!profileData.doctor) {
+  if (!profileData.pharmacist) {
     return "Unauthorised!!!";
   }
 
