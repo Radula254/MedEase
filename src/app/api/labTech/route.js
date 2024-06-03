@@ -1,9 +1,7 @@
 import {authOptions} from "@/app/api/auth/[...nextauth]/route";
 import {User} from "../../models/User";
-import { DoctorInfo } from "@/app/models/DoctorInfo";
 import mongoose from "mongoose";
 import {getServerSession} from "next-auth";
-import { NurseInfo } from "@/app/models/NurseInfo";
 import { LabTechInfo } from "@/app/models/LabTechInfo";
 
 

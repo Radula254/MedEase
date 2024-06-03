@@ -1,5 +1,6 @@
 "use client";
 import PharmaDashboard from "@/components/layout/PharmaDashboard/PharmaDashboard";
+import { useProfile } from "@/components/UseProfile";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -7,22 +8,7 @@ import { useEffect, useState } from "react";
 export default function PharmaHomePage() {
   const session = useSession();
   const {status} = session;
-  const [isPharmacist, setIsPharmacist] = useState(false);
-
-  useEffect(() => {
-    if (status === "authenticated") {
-      fetch("/api/profile").then((response) => {
-        response.json().then((data) => {
-            if (data.pharmacistCheck) {
-                setIsPharmacist(true);
-            }
-            else {
-                setIsPharmacist(false);
-            }
-        });
-      });
-    }
-  }, [session, status]);
+  const { loading: profileLoading, data: profileData } = useProfile();
 
   if (status === "loading") {
     return "Loading...";
@@ -32,8 +18,12 @@ export default function PharmaHomePage() {
     return redirect('/login');
   }
 
-  if (!isPharmacist) {
-    return "Not Authorised"
+  if (!profileData.pharmacist) {
+    return (
+      <div className="text-center my-28 font-extrabold text-5xl">
+          <p style={{ color: 'red' }}>Unauthorised!!!</p>
+      </div>
+    )
   }
 
 

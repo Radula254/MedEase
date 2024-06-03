@@ -12,7 +12,7 @@ export default function PharmaDashboard() {
                     <h3>Dispense Drugs</h3>
                 </div>
                 <div className={styles.dataCard}>
-                    <Link href={'/'} className={styles.Link}><Image src={'/DataDisplay.png'} width={100} height={100} className={styles.image}  alt="Data Display Picture"/></Link>
+                    <Link href={'/appointments/pharmacist'} className={styles.Link}><Image src={'/DataDisplay.png'} width={100} height={100} className={styles.image}  alt="Data Display Picture"/></Link>
                     <h3>View Patients Prescriptions Data</h3>
                 </div>
                 <div className={styles.dataCard}>

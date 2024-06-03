@@ -14,7 +14,7 @@ export default function UserTabs({ isPatient, isPharmacist }) {
         <>
           <Link
             className={path.includes("/appointments") ? "active" : ""}
-            href={"/appointments"}
+            href={"/appointments/patient/"}
           >
             Appointments
           </Link>
