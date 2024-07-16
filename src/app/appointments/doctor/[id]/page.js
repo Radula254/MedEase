@@ -56,7 +56,6 @@ export default function EditUserPage() {
 
   return (
     <section className="mt-10 mb-20 mx-auto max-w-2xl">
-      <UserTabs isAdmin={true} />
       <div className="max-w-2xl mx-auto mt-8">
         <DoctorAppointmentForm user={user} onSave={handleSaveButtonClick} />
       </div>

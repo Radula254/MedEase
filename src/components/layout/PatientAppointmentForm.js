@@ -1,13 +1,13 @@
 import { useState } from "react";
 import EditableImage from "./EditableImage";
 
-export default function PatientAppointmentForm({user, onSave}) {
+export default function PatientAppointmentForm({ user, onSave }) {
   const [symptoms, setSymptoms] = useState('');
   const [createdAppointment, setCreatedAppointment] = useState(false);
 
   function handleBooking(ev) {
     setSymptoms(ev.target.value);
-    setCreatedAppointment(true)
+    setCreatedAppointment(true);
   }
 
   return (
@@ -21,6 +21,8 @@ export default function PatientAppointmentForm({user, onSave}) {
         className="grow"
         onSubmit={(ev) =>
           onSave(ev, {
+            name: user?.name,
+            email: user?.email,
             symptoms,
             createdAppointment,
           })
@@ -31,7 +33,7 @@ export default function PatientAppointmentForm({user, onSave}) {
           type="text"
           placeholder="First and last name"
           value={user?.name}
-          disabled={true} 
+          disabled={true}
         />
         <label>Email:</label>
         <input type="email" disabled={true} value={user?.email} />

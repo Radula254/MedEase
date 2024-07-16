@@ -15,6 +15,7 @@ export default function AppointmentForm({user, onSave}) {
     fetch('/api/doctors').then(res => {
       res.json().then(doctors => {
         setDoctor(doctors);
+        console.log(doctors)
       });
     });
   }, []);
@@ -24,7 +25,7 @@ export default function AppointmentForm({user, onSave}) {
     setStatus(true);
   }
 
-  console.log(user)
+  console.log(doctor)
 
   return (
     <div className="flex gap-4 ">

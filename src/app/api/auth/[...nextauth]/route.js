@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import * as mongoose from "mongoose";
+import mongoose from "mongoose";
 import { User } from "@/app/models/User";
 import bcrypt from "bcrypt";
 
@@ -11,22 +11,35 @@ export const authOptions = {
       name: "Credentials",
       id: 'credentials',
       credentials: {
-        username: { label: "Email", type: "email", placeholder: "johndoe@example.com" },
+        email: { label: "Email", type: "email", placeholder: "johndoe@example.com" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
         const email = credentials?.email;
         const password = credentials?.password;
 
-        mongoose.connect(process.env.NEXT_PUBLIC_MONGOURL);
-        const user = await User.findOne({email});
-        const passwordOk = user && bcrypt.compareSync(password, user.password);
-
-        if (passwordOk) {
-          return user;
+        if (!email || !password) {
+          throw new Error("Please enter both email and password.");
         }
 
-        return null;
+        await mongoose.connect(process.env.NEXT_PUBLIC_MONGOURL, {
+          useNewUrlParser: true,
+          useUnifiedTopology: true,
+        });
+
+        const user = await User.findOne({ email });
+
+        if (!user) {
+          throw new Error("No user found with this email.");
+        }
+
+        const passwordOk = bcrypt.compareSync(password, user.password);
+
+        if (!passwordOk) {
+          throw new Error("Invalid password.");
+        }
+
+        return user;
       },
     }),
   ],

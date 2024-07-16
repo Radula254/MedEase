@@ -31,6 +31,7 @@ export default function EditUserPage() {
       });
       if (response.ok) {
         resolve();
+        window.location.href = "/appointments/nurse"
       } else {
         reject();
       }
@@ -38,7 +39,7 @@ export default function EditUserPage() {
 
     await toast.promise(savePromise, {
       loading: "Saving...",
-      success: "Profile Saved",
+      success: "Saved",
       error: "Error saving!!",
     });
   }
@@ -57,7 +58,7 @@ export default function EditUserPage() {
 
   return (
     <section className="mt-8 mx-auto max-w-2xl">
-      <div className="max-w-2xl mx-auto mt-8">
+      <div className="max-w-2xl mx-auto mt-8 mb-8">
         <AppointmentForm user={user} onSave={handleSaveButtonClick} />
       </div>
     </section>

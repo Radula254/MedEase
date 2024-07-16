@@ -1,11 +1,12 @@
 import {authOptions} from "@/app/api/auth/[...nextauth]/route";
 import {User} from "../../models/User";
+import {UserInfo} from "../../models/UserInfo";
 import mongoose from "mongoose";
 import {getServerSession} from "next-auth";
 import { AppointmentInfo } from "@/app/models/Appointment";
 
 export async function POST(req) {
-  await mongoose.connect(process.env.NEXT_PUBLIC_MONGOURL);
+  mongoose.connect(process.env.NEXT_PUBLIC_MONGOURL);
 
   const data = await req.json();
   const { _id, name, image, ...otherUserInfo } = data;
@@ -28,9 +29,6 @@ export async function POST(req) {
   if (!user) {
       return new Response("User not found", { status: 404 });
   }
-
-  // Update user information
-  await User.updateOne({ _id: user._id }, { name, image });
 
   // Ensure email from user is used if not already defined from session for non-_id cases
   userEmail = userEmail || user.email;
@@ -86,8 +84,11 @@ export async function GET(req) {
   }
 
   const user = await User.findOne(filterUser).lean();
-  const userInfo = await AppointmentInfo.findOne({email:user.email}).lean();
+  const userInfo = await UserInfo.findOne({email:user.email}).lean();
+  const appointmentInfo = await AppointmentInfo.findOne({email:user.email}).lean();
 
-  return Response.json({...user, ...userInfo});
+  console.log(userInfo)
+
+  return Response.json({...user, ...appointmentInfo , ...userInfo});
 
 }

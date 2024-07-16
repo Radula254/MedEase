@@ -21,6 +21,8 @@ export default function UsersPage() {
     return "Loading ...";
   }
 
+  console.log(profileData.receptionist)
+
   if (!profileData.receptionist) {
     return (
       <div className="text-center my-28 font-extrabold text-5xl">

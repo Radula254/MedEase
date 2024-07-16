@@ -32,6 +32,7 @@ export default function EditUserPage() {
       });
       if (response.ok) {
         resolve();
+        window.location.href = "/appointments/pharmacist"
       } else {
         reject();
       }

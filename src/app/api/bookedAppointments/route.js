@@ -2,33 +2,45 @@ import mongoose from 'mongoose';
 import { User } from "../../models/User";
 import { AppointmentInfo } from "@/app/models/Appointment";
 
-export async function GET() {
-    if (mongoose.connection.readyState !== 1) {
-        await mongoose.connect(process.env.NEXT_PUBLIC_MONGOURL);
-    }
+export async function GET(req) {
+  if (mongoose.connection.readyState !== 1) {
+    await mongoose.connect(process.env.NEXT_PUBLIC_MONGOURL);
+  }
 
-    const users = await User.find({
-        admin: false,
-        doctor: false,
-        nurse: false,
-        receptionist: false,
-        labTech: false
-    }).lean(); 
+  const { searchParams } = new URL(req.url);
+  const userId = searchParams.get('userId');
+  const role = searchParams.get('role');
 
-    const usersWithDetailsPromises = users.map(async user => {
-        const userInfo = await AppointmentInfo.findOne({
-            email: user.email,
-            createdAppointment: true,
-        }).lean();
+  let roleFilter = {};
+  if (role === 'doctor') {
+    roleFilter = { selectedDoctor: userId };
+  } else if (role === 'nurse') {
+    roleFilter = { selectedNurse: userId };
+  }
 
-        return {
-            ...user,
-            userInfo
-        };
-    });
+  const appointments = await AppointmentInfo.find({
+    ...roleFilter,
+    createdAppointment: true
+  }).lean();
 
-    const usersWithDetails = await Promise.all(usersWithDetailsPromises);
+  const userEmails = appointments.map(appointment => appointment.email);
 
-    return Response.json(usersWithDetails);
+  const users = await User.find({
+    email: { $in: userEmails },
+    admin: false,
+    doctor: false,
+    nurse: false,
+    receptionist: false,
+    labTech: false
+  }).lean();
+
+  const usersWithDetails = users.map(user => {
+    const userInfo = appointments.find(app => app.email === user.email);
+    return {
+      ...user,
+      userInfo
+    };
+  });
+
+  return new Response(JSON.stringify(usersWithDetails), { status: 200 });
 }
-

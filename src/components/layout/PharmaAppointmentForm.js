@@ -6,6 +6,7 @@ import Plus from "../icons/Plus";
 export default function PharmaAppointmentForm({ user, onSave }) {
   const [prescriptionsAndFrequency, setPrescriptionsAndFrequency] = useState(user?.prescriptionsAndFrequency || "");
   const [drugs, setDrugs] = useState([]);
+  const [prescriptionsStatus, setPrescriptionsStatus] = useState(true)
 
 
   function adddrugs() {
@@ -29,8 +30,6 @@ export default function PharmaAppointmentForm({ user, onSave }) {
     );
   }
 
-  console.log(user);
-
   return (
     <div className="flex gap-4 mx-auto">
       <div>
@@ -43,6 +42,7 @@ export default function PharmaAppointmentForm({ user, onSave }) {
         onSubmit={(ev) =>
           onSave(ev, {
             drugs,
+            prescriptionsStatus,
           })
         }
       >
@@ -59,7 +59,7 @@ export default function PharmaAppointmentForm({ user, onSave }) {
         <textarea
           type="text"
           placeholder="Prescriptions and Frequency"
-          value={prescriptionsAndFrequency}
+          value={user?.prescriptionsAndFrequency}
           disabled={true}
         />
         <div className="bg-gray-200 p-2 rounded-md mb-2">

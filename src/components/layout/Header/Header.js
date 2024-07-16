@@ -26,7 +26,7 @@ export default function Header() {
     if (status === "authenticated") {
       fetch("/api/profile").then((response) => {
         response.json().then((data) => {
-          if (data.pharmacist === true ) {
+          if (data.pharmacist === true) {
             setIsPharmacist(true);
           } else if (data.admin === true) {
             setIsAdmin(true);
@@ -39,97 +39,301 @@ export default function Header() {
           } else if (data.receptionist === true) {
             setIsReceptionist(true);
           } else {
-            setIsPatient(true)
+            setIsPatient(true);
           }
-          setUserId(data._id)
+          setUserId(data._id);
         });
       });
-
     }
   }, [session, status]);
 
-  useEffect(() => {
-
-  }, [])
+  useEffect(() => {}, []);
 
   return (
     <header className={styles.header}>
-      <Link href="/"><Image src={'/logo7.jpg'} className={styles.logo} width="90" height="90" alt="Logo"/></Link>
+      <Link href="/">
+        <Image src={"/logo7.jpg"} className={styles.logo} width="90" height="90" alt="Logo" />
+      </Link>
 
-
-      {status === 'unauthenticated' && (
+      {status === "unauthenticated" && (
         <nav className={styles.navbar}>
-        <li className={styles.navbarLi}><Link href={'/'} className={styles.navbarLiLink}>Home</Link></li>
-        <li className={styles.navbarLi}><Link href={'/services'} className={styles.navbarLiLink}>Services</Link></li>
-        <li className={styles.navbarLi}><Link href={'/about'} className={styles.navbarLiLink}>About</Link></li>
-      </nav>
+          <li className={styles.navbarLi}>
+            <Link href={"/"} className={styles.navbarLiLink}>
+              Home
+            </Link>
+          </li>
+          <li className={styles.navbarLi}>
+            <Link href={"/about"} className={styles.navbarLiLink}>
+              About
+            </Link>
+          </li>
+        </nav>
       )}
-      {status === 'authenticated' && isPatient && (
+      {status === "authenticated" && isPatient && (
         <nav className={styles.navbarr}>
-        <li className={styles.navbarLi}><Link href={'/'} className={styles.navbarLiLink}>Home</Link></li>
-        <li className={styles.navbarLi}><Link href={'/services'} className={styles.navbarLiLink}>Services</Link></li>
-        <li className={styles.navbarLi}><Link href={'/about'} className={styles.navbarLiLink}>About</Link></li>
-        <li className={styles.navbarLi}><Link href={'/appointments/patient/' + userId} className={styles.navbarLiLink}>Appointment2</Link></li>
-      </nav>
+          <li className={styles.navbarLi}>
+            <Link href={"/"} className={styles.navbarLiLink}>
+              Home
+            </Link>
+          </li>
+          <li className={styles.navbarLi}>
+            <Link href={"/about"} className={styles.navbarLiLink}>
+              About
+            </Link>
+          </li>
+          <li className={styles.navbarLi}>
+            <Link href={`/appointments/patient/${userId}`} className={styles.navbarLiLink}>
+              Book Appointment
+            </Link>
+          </li>
+        </nav>
       )}
-      {status === 'authenticated' && isAdmin && (
+      {status === "authenticated" && isAdmin && (
         <nav className={styles.navbarr}>
-        <li className={styles.navbarLi}><Link href={'/'} className={styles.navbarLiLink}>Home</Link></li>
-        <li className={styles.navbarLi}><Link href={'/services'} className={styles.navbarLiLink}>Services</Link></li>
-        <li className={styles.navbarLi}><Link href={'/about'} className={styles.navbarLiLink}>About</Link></li>
-        <li className={styles.navbarLi}><Link href={'/admin'} className={styles.navbarLiLink}>DashBoard</Link></li>
-      </nav>
-      )}{status === 'authenticated' && isPharmacist && (
-        <nav className={styles.navbarr}>
-        <li className={styles.navbarLi}><Link href={'/'} className={styles.navbarLiLink}>Home</Link></li>
-        <li className={styles.navbarLi}><Link href={'/services'} className={styles.navbarLiLink}>Services</Link></li>
-        <li className={styles.navbarLi}><Link href={'/about'} className={styles.navbarLiLink}>About</Link></li>
-        <li className={styles.navbarLi}><Link href={'/pharma'} className={styles.navbarLiLink}>DashBoard</Link></li>
-      </nav>
+          <li className={styles.navbarLi}>
+            <Link href={"/"} className={styles.navbarLiLink}>
+              Home
+            </Link>
+          </li>
+          <li className={styles.navbarLi}>
+            <Link href={"/about"} className={styles.navbarLiLink}>
+              About
+            </Link>
+          </li>
+          <li className={styles.navbarLi}>
+            <Link href={"/admin"} className={styles.navbarLiLink}>
+              DashBoard
+            </Link>
+          </li>
+        </nav>
       )}
-      {status === 'authenticated' && isDoctor && (
+      {status === "authenticated" && isPharmacist && (
         <nav className={styles.navbarr}>
-        <li className={styles.navbarLi}><Link href={'/'} className={styles.navbarLiLink}>Home</Link></li>
-        <li className={styles.navbarLi}><Link href={'/services'} className={styles.navbarLiLink}>Services</Link></li>
-        <li className={styles.navbarLi}><Link href={'/about'} className={styles.navbarLiLink}>About</Link></li>
-        <li className={styles.navbarLi}><Link href={'/pharma'} className={styles.navbarLiLink}>DashBoard</Link></li>
-      </nav>
+          <li className={styles.navbarLi}>
+            <Link href={"/"} className={styles.navbarLiLink}>
+              Home
+            </Link>
+          </li>
+          <li className={styles.navbarLi}>
+            <Link href={"/about"} className={styles.navbarLiLink}>
+              About
+            </Link>
+          </li>
+          <li className={styles.navbarLi}>
+            <Link href={"/staffDashBoard/pharmacist"} className={styles.navbarLiLink}>
+              DashBoard
+            </Link>
+          </li>
+        </nav>
       )}
-      {status === 'authenticated' && isNurse && (
+      {status === "authenticated" && isDoctor && (
         <nav className={styles.navbarr}>
-        <li className={styles.navbarLi}><Link href={'/'} className={styles.navbarLiLink}>Home</Link></li>
-        <li className={styles.navbarLi}><Link href={'/services'} className={styles.navbarLiLink}>Services</Link></li>
-        <li className={styles.navbarLi}><Link href={'/about'} className={styles.navbarLiLink}>About</Link></li>
-        <li className={styles.navbarLi}><Link href={'/pharma'} className={styles.navbarLiLink}>DashBoard</Link></li>
-      </nav>
+          <li className={styles.navbarLi}>
+            <Link href={"/"} className={styles.navbarLiLink}>
+              Home
+            </Link>
+          </li>
+          <li className={styles.navbarLi}>
+            <Link href={"/about"} className={styles.navbarLiLink}>
+              About
+            </Link>
+          </li>
+          <li className={styles.navbarLi}>
+            <Link href={"/staffDashBoard/doctor"} className={styles.navbarLiLink}>
+              DashBoard
+            </Link>
+          </li>
+        </nav>
       )}
-      {status === 'authenticated' && isLabTech && (
+      {status === "authenticated" && isNurse && (
         <nav className={styles.navbarr}>
-        <li className={styles.navbarLi}><Link href={'/'} className={styles.navbarLiLink}>Home</Link></li>
-        <li className={styles.navbarLi}><Link href={'/services'} className={styles.navbarLiLink}>Services</Link></li>
-        <li className={styles.navbarLi}><Link href={'/about'} className={styles.navbarLiLink}>About</Link></li>
-        <li className={styles.navbarLi}><Link href={'/pharma'} className={styles.navbarLiLink}>DashBoard</Link></li>
-      </nav>
+          <li className={styles.navbarLi}>
+            <Link href={"/"} className={styles.navbarLiLink}>
+              Home
+            </Link>
+          </li>
+          <li className={styles.navbarLi}>
+            <Link href={"/about"} className={styles.navbarLiLink}>
+              About
+            </Link>
+          </li>
+          <li className={styles.navbarLi}>
+            <Link href={"/staffDashBoard/nurse"} className={styles.navbarLiLink}>
+              DashBoard
+            </Link>
+          </li>
+        </nav>
       )}
-      {status === 'authenticated' && isReceptionist && (
+      {status === "authenticated" && isLabTech && (
         <nav className={styles.navbarr}>
-        <li className={styles.navbarLi}><Link href={'/'} className={styles.navbarLiLink}>Home</Link></li>
-        <li className={styles.navbarLi}><Link href={'/services'} className={styles.navbarLiLink}>Services</Link></li>
-        <li className={styles.navbarLi}><Link href={'/about'} className={styles.navbarLiLink}>About</Link></li>
-        <li className={styles.navbarLi}><Link href={'/pharma'} className={styles.navbarLiLink}>DashBoard</Link></li>
-      </nav>
+          <li className={styles.navbarLi}>
+            <Link href={"/"} className={styles.navbarLiLink}>
+              Home
+            </Link>
+          </li>
+          <li className={styles.navbarLi}>
+            <Link href={"/about"} className={styles.navbarLiLink}>
+              About
+            </Link>
+          </li>
+          <li className={styles.navbarLi}>
+            <Link href={"/staffDashBoard/labTech"} className={styles.navbarLiLink}>
+              DashBoard
+            </Link>
+          </li>
+        </nav>
+      )}
+      {status === "authenticated" && isReceptionist && (
+        <nav className={styles.navbarr}>
+          <li className={styles.navbarLi}>
+            <Link href={"/"} className={styles.navbarLiLink}>
+              Home
+            </Link>
+          </li>
+          <li className={styles.navbarLi}>
+            <Link href={"/about"} className={styles.navbarLiLink}>
+              About
+            </Link>
+          </li>
+          <li className={styles.navbarLi}>
+            <Link href={"/staffDashBoard/receptionist"} className={styles.navbarLiLink}>
+              DashBoard
+            </Link>
+          </li>
+        </nav>
       )}
       <nav className={styles.navbar}>
-        {status === 'authenticated' && (
+        {status === "authenticated" && isAdmin && (
           <>
-           <li className={styles.navbarLi}><Link href={'/profile'} className={styles.navbarLiLink}>Welcome {userName}</Link></li>
-          <li className={styles.navbarLi}><button onClick={() => signOut()} className={styles.navbarLiLink}>Logout</button></li>
+            <li className={styles.navbarLi}>
+              <Link href={"/profiles/admin"} className={styles.navbarLiLink}>
+                Welcome {userName}
+              </Link>
+            </li>
+            <li className={styles.navbarLi}>
+              <button
+                onClick={() => signOut({ callbackUrl: "/" })}
+                className={styles.navbarLiLink}
+              >
+                Logout
+              </button>
+            </li>
           </>
         )}
-        {status === 'unauthenticated' && (
+        {status === "authenticated" && isDoctor && (
           <>
-          <li className={styles.navbarLi}><Link href={'/login'} className={styles.navbarLiLink}>Login</Link></li>
-          <li className={styles.navbarLi}><Link href={'/signup'} className={styles.navbarLiLink}>SignUp</Link></li>
+            <li className={styles.navbarLi}>
+              <Link href={"/profiles/doctor"} className={styles.navbarLiLink}>
+                Welcome {userName}
+              </Link>
+            </li>
+            <li className={styles.navbarLi}>
+              <button
+                onClick={() => signOut({ callbackUrl: "/" })}
+                className={styles.navbarLiLink}
+              >
+                Logout
+              </button>
+            </li>
+          </>
+        )}
+        {status === "authenticated" && isPatient && (
+          <>
+            <li className={styles.navbarLi}>
+              <Link href={"/profiles/patient"} className={styles.navbarLiLink}>
+                Welcome {userName}
+              </Link>
+            </li>
+            <li className={styles.navbarLi}>
+              <button
+                onClick={() => signOut({ callbackUrl: "/" })}
+                className={styles.navbarLiLink}
+              >
+                Logout
+              </button>
+            </li>
+          </>
+        )}
+        {status === "authenticated" && isLabTech && (
+          <>
+            <li className={styles.navbarLi}>
+              <Link href={"/profiles/labTech"} className={styles.navbarLiLink}>
+                Welcome {userName}
+              </Link>
+            </li>
+            <li className={styles.navbarLi}>
+              <button
+                onClick={() => signOut({ callbackUrl: "/" })}
+                className={styles.navbarLiLink}
+              >
+                Logout
+              </button>
+            </li>
+          </>
+        )}
+        {status === "authenticated" && isNurse && (
+          <>
+            <li className={styles.navbarLi}>
+              <Link href={"/profiles/nurse"} className={styles.navbarLiLink}>
+                Welcome {userName}
+              </Link>
+            </li>
+            <li className={styles.navbarLi}>
+              <button
+                onClick={() => signOut({ callbackUrl: "/" })}
+                className={styles.navbarLiLink}
+              >
+                Logout
+              </button>
+            </li>
+          </>
+        )}
+        {status === "authenticated" && isReceptionist && (
+          <>
+            <li className={styles.navbarLi}>
+              <Link href={"/profiles/receptionist"} className={styles.navbarLiLink}>
+                Welcome {userName}
+              </Link>
+            </li>
+            <li className={styles.navbarLi}>
+              <button
+                onClick={() => signOut({ callbackUrl: "/" })}
+                className={styles.navbarLiLink}
+              >
+                Logout
+              </button>
+            </li>
+          </>
+        )}
+        {status === "authenticated" && isPharmacist && (
+          <>
+            <li className={styles.navbarLi}>
+              <Link href={"/profiles/receptionist"} className={styles.navbarLiLink}>
+                Welcome {userName}
+              </Link>
+            </li>
+            <li className={styles.navbarLi}>
+              <button
+                onClick={() => signOut({ callbackUrl: "/" })}
+                className={styles.navbarLiLink}
+              >
+                Logout
+              </button>
+            </li>
+          </>
+        )}
+        {status === "unauthenticated" && (
+          <>
+            <li className={styles.navbarLi}>
+              <Link href={"/login"} className={styles.navbarLiLink}>
+                Login
+              </Link>
+            </li>
+            <li className={styles.navbarLi}>
+              <Link href={"/signup"} className={styles.navbarLiLink}>
+                SignUp
+              </Link>
+            </li>
           </>
         )}
       </nav>

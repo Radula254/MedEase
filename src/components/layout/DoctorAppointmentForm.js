@@ -7,7 +7,7 @@ export default function DoctorAppointmentForm({user, onSave}) {
   const [diagnosis, setDiagnosis] = useState(user?.diagnosis || '');
   const [labResults, setLabResults] = useState(user?.labResults || '');
   const [prescriptionsAndFrequency, setPrescriptionsAndFrequency] = useState(user?.prescriptionsAndFrequency || '');
-  const [labResultStatus, setLabResultStatus] = useState(user?.labResultStatus || false);
+  const [labResultStatus, setLabResultStatus] = useState(null);
   const [consulted, setConsulted] = useState(user?.consulted || false);
 
   function handleLabratoryTest() {
@@ -19,6 +19,8 @@ export default function DoctorAppointmentForm({user, onSave}) {
     setDiagnosis(ev.target.value);
     setConsulted(true);
   }
+
+  console.log(user?.labResults)
 
   return (
     <div className="flex gap-4 ">
@@ -51,7 +53,7 @@ export default function DoctorAppointmentForm({user, onSave}) {
         <textarea
           type="text"
           placeholder="Lab Results"
-          value={labResults}
+          value={user?.labResults}
           disabled={true}
         />
         <div>

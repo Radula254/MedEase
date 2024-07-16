@@ -27,6 +27,8 @@ export default function UsersPage() {
     )
   }
 
+  console.log(users)
+
   return (
     <section className="max-w-2xl mx-auto mt-10 mb-20">
   <div className="mt-8">
@@ -41,7 +43,7 @@ export default function UsersPage() {
             <span className="text-gray-500">{user.email}</span>
           </div>
           <div>
-            <Link className="button" href={"/labTech/" + user._id}>
+            <Link className="button" href={"/appointments/labTech/" + user._id}>
               Edit
             </Link>
           </div>

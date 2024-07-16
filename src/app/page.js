@@ -3,6 +3,7 @@ import Hero from "@/components/layout/Hero/Hero";
 import NewsLetter from "@/components/layout/NewsLetter/NewsLetter";
 import Partners from "@/components/layout/Partners/Partners";
 import Team from "@/components/layout/Team/Team";
+import Footer from "@/components/layout/Footer/Footer";
 
 export default function Home() {
   return (
@@ -11,7 +12,7 @@ export default function Home() {
       <Team />
       <Banner />
       <Partners />
-      <NewsLetter />
+      <Footer />
     </>
   );
 }

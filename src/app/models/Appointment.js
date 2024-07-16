@@ -20,7 +20,7 @@ const AppointmentInfoSchema = new Schema(
     consultationPrice: { type: String },
     status: { type: Boolean, default: false },
     selectedDoctor: { type: mongoose.Types.ObjectId, default: null },
-    labResultStatus: {type: Boolean, default: false},
+    labResultStatus: {type: Boolean, default: true},
     labResults: { type: String },
     labResultsDone: {type: Boolean, default: false},
     diagnosis: { type: String },
@@ -29,6 +29,7 @@ const AppointmentInfoSchema = new Schema(
     drugs: {type:[DrugsGivenSchema]},
     total: {type: String},
     paymentStatus: {type: Boolean, default: false},
+    prescriptionsStatus: {type: Boolean, default: true},
   },
   { timestamps: true }
 );

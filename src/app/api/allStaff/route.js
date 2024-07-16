@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import { User } from "../../models/User";
+import bcrypt from "bcrypt";
 import { NurseInfo } from '@/app/models/NurseInfo';
 import { DoctorInfo } from '@/app/models/DoctorInfo';
 import { ReceptionistInfo } from '@/app/models/ReceptionistInfo';
@@ -41,3 +42,24 @@ export async function GET() {
     }
     return Response.json(usersWithDetails);
 }
+
+export async function POST(req) {
+    try {
+      const body = await req.json();
+      await mongoose.connect(process.env.NEXT_PUBLIC_MONGOURL);
+  
+      const { password } = body;
+      if (!password || password.length < 5) {
+        throw new Error('Password must be at least 5 characters');
+      }
+  
+      const notHashedPassword = password;
+      const salt = bcrypt.genSaltSync(10);
+      body.password = bcrypt.hashSync(notHashedPassword, salt);
+  
+      const createdUser = await User.create(body);
+      return new Response(JSON.stringify(createdUser), { status: 201 });
+    } catch (error) {
+      return new Response(JSON.stringify({ message: error.message }), { status: 400 });
+    }
+  }

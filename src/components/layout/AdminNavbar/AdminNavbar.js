@@ -11,10 +11,11 @@ export default function AdminNavbar() {
         </div>
         <ul className={styles.roleList}>
           <li>
-            <Link href={"/addAdmin"} className={styles.Link}>
-              Admin
+            <Link href={"/addStaff"} className={styles.Link}>
+              Add Staff
             </Link>
           </li>
+          
           <li>
             <Link href={"/addDoctor"} className={styles.Link}>
               Doctor

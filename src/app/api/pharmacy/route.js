@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 import { User } from "../../models/User";
-import { DoctorInfo } from "@/app/models/DoctorInfo";
 import { PharmacistInfo } from '@/app/models/PharmacistInfo';
 
 export async function GET() {

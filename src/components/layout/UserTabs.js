@@ -10,16 +10,6 @@ export default function UserTabs({ isPatient, isPharmacist }) {
       <Link className={path === "/profile" ? "active" : ""} href={"/profile"}>
         Profile
       </Link>
-      {isPatient && (
-        <>
-          <Link
-            className={path.includes("/appointments") ? "active" : ""}
-            href={"/appointments/patient/"}
-          >
-            Appointments
-          </Link>
-        </>
-      )}
     </div>
   );
 }

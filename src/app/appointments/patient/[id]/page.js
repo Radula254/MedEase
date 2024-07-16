@@ -1,34 +1,34 @@
 "use client";
-import UserTabs from "@/components/layout/UserTabs";
 import { useProfile } from "@/components/UseProfile";
-import UserForm from "@/components/layout/UserForm";
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { useParams } from "next/navigation";
 import toast from "react-hot-toast";
-import AppointmentForm from "@/components/layout/AppointmentForm";
 import PatientAppointmentForm from "@/components/layout/PatientAppointmentForm";
+import { useSession } from "next-auth/react";
 
 export default function EditUserPage() {
   const [user, setUser] = useState(null);
   const { loading: profileLoading, data: profileData } = useProfile();
   const { id } = useParams();
+  const { data: session, status } = useSession();
 
   useEffect(() => {
-    fetch("/api/appointments?_id=" + id).then((res) => {
-      res.json().then((user) => {
-        setUser(user);
+    if (status === "authenticated") {
+      fetch("/api/profile").then((response) => {
+        response.json().then((data) => {
+          setUser(data);
+        });
       });
-    });
-  }, []);
+    }
+  }, [session, status]);
 
   async function handleSaveButtonClick(ev, data) {
     ev.preventDefault();
     const savePromise = new Promise(async (resolve, reject) => {
-      const response = await fetch("/api/appointments", {
+      const response = await fetch("/api/appointment", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...data, _id: id }),
+        body: JSON.stringify(data),
       });
       if (response.ok) {
         resolve();
@@ -42,9 +42,12 @@ export default function EditUserPage() {
       success: "Saved",
       error: "Error saving!!",
     });
+
+    // Redirect to home page after successful save
+    window.location.href = "/";
   }
 
-  if (profileLoading) {
+  if (profileLoading || status === "loading") {
     return "Loading ...";
   }
 

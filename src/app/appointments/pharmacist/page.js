@@ -27,10 +27,10 @@ export default function UsersPage() {
 
   return (
     <section className="max-w-2xl mx-auto mt-10 mb-20">
-        <h1 className="font-bold text-2xl text-center text-primary">Appointment Booking</h1>
+        <h1 className="font-bold text-2xl text-center text-primary">Dispense Drugs</h1>
   <div className="mt-8">
-    {users?.filter(user => user?.userInfo?.consulted === true && user?.userInfo?.consultationPayment === true).length > 0 ?
-      users.filter(user => user?.userInfo?.consulted === true && user?.userInfo?.consultationPayment === true).map((user) => (
+    {users?.filter(user => user?.userInfo?.consulted === true && user?.userInfo?.consultationPayment === true && user?.userInfo?.prescriptionsStatus === false).length > 0 ?
+      users.filter(user => user?.userInfo?.consulted === true && user?.userInfo?.consultationPayment === true && user?.userInfo?.prescriptionsStatus === false).map((user) => (
         <div key={user._id} className="bg-gray-100 rounded-lg mb-2 p-1 px-4 flex items-center gap-4">
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 grow">
             <div className="text-gray-700">

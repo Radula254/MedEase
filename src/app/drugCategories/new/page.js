@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import CategoryForm from "@/components/layout/CategoryForm";
 import Link from "next/link";
 import Left from "@/components/icons/Left";
+import { redirect } from "next/navigation";
 
 export default function AddDrugCategoriesPage() {
     const [redirectToDrugs, setRedirectToDrugs] = useState(false);
@@ -45,8 +46,8 @@ export default function AddDrugCategoriesPage() {
         return 'Loading...';
     }
 
-    if (!data.patient) {
-        return 'Not an patient';
+    if (!data.pharmacist) {
+        return 'Not Pharmacist';
     }
 
     return(
